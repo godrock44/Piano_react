@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PianoKeyMapper from './keyMapping.js'
+import MusicStaff from "./Stave.js";
 
 function MIDIKeyPressListener() {
   const [midiMessages, setMidiMessages] = useState([]);
@@ -79,6 +80,7 @@ function MIDIKeyPressListener() {
       ) : (
         <p>No keys pressed yet</p>
       )}
+      <MusicStaff />
     </div>
   );
 }
