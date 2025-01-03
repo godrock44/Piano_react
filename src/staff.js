@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import Vex from "vexflow";
-import PianoKeyMapper from "./keyMapping"
 
 const MusicStaff = ({ midiMessages }) => {
   const divRef = useRef(null);
@@ -10,6 +9,9 @@ const MusicStaff = ({ midiMessages }) => {
 
     const { Renderer, Stave, StaveNote, Formatter } = Vex.Flow;
     const div = divRef.current;
+
+    //clear pervious data
+    div.innerHTML = " ";
 
     // Set up the renderer
     const renderer = new Renderer(div, Renderer.Backends.SVG);
