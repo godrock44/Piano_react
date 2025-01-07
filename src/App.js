@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import PianoKeyMapper from './keyMapping.js'
 import MusicStaff from './staff.js'
+import RandomNoteStaff from './RandomNote.js'
 
 function MIDIKeyPressListener() {
   const [midiMessages, setMidiMessages] = useState([]);
   const [currentMessage, setCurrentMessage] = useState(null);
+  const [isSharp, setIsSharp]= useState(true);
   const [status, setStatus] = useState("Waiting for MIDI device...");
 
   useEffect(() => {
@@ -64,38 +66,50 @@ function MIDIKeyPressListener() {
   return (
     <div style={{ padding: "20px", fontFamily: "Arial" }}>
       <h1>MIDI Key Press Listener</h1>
+      <RandomNoteStaff/>
       <MusicStaff midiMessages = {midiMessages} />
       <p>{status}</p>
 
       {currentMessage && (
         <div style={{ marginBottom: "20px" }}>
           <strong>Current Message:</strong>
+
+          <label style={{marginRight:'10px'}}>
+            <input
+              type="checkbox"
+              checked = {isSharp}
+              onChange={() => setIsSharp(true)}
+            />
+            Sharp Notation
+          </label>
+
+          <label style={{marginRight:'10px'}}>
+            <input
+              type="checkbox"
+              checked = {!isSharp}
+              onChange={() => setIsSharp(false)}
+            />
+            Flat Notation
+          </label>
+
           <p>
-            Note: <PianoKeyMapper note={currentMessage.note} isSharp={true} /> ({currentMessage.note}),
-            Status: {currentMessage.noteStatus}, Velocity: {currentMessage.velocity}, 
-            Time: {currentMessage.timestamp.toFixed()}
+            {isSharp ? (
+              <p>
+                Note: <PianoKeyMapper note={currentMessage.note} isSharp={true} /> ({currentMessage.note}),
+                Status: {currentMessage.noteStatus}, Velocity: {currentMessage.velocity}, 
+                Time: {currentMessage.timestamp.toFixed()}
+              </p>) : 
+              <p>
+                Note: <PianoKeyMapper note={currentMessage.note} isSharp={false} /> ({currentMessage.note}),
+                Status: {currentMessage.noteStatus}, Velocity: {currentMessage.velocity}, 
+                Time: {currentMessage.timestamp.toFixed()}
+              </p>}
           </p>
         </div>
-      )}
-
-      {/* {midiMessages.length > 0 ? (
-        <p>
-          {midiMessages.map((msg, index) => (
-            <p key={index}>
-            Note: <PianoKeyMapper note={msg.note} isSharp={true} /> ({msg.note}), Status: {msg.noteStatus}, Velocity: {msg.velocity}, Time: {msg.timestamp.toFixed()}
-            </p>
-          ))}
-        </p>
-      ) : (
-        <p>No keys pressed yet</p>
-      )} */}
+      )}  
     </div>
   );
 }
 
-// const midiMessages = [
-//   { note: 60, noteStatus: 'Pressed', velocity: 100, timestamp: 1234 },   
-//   { note: 61, noteStatus: 'Released', velocity: 80, timestamp: 1267 },
-// ];
 export default MIDIKeyPressListener;
 

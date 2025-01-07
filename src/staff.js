@@ -24,7 +24,7 @@ const MusicStaff = ({ midiMessages }) => {
     stave.setContext(context).draw();
 
     // Helper function to convert MIDI note to VexFlow pitch
-    const midiNoteToPitch = (note) => {
+    const noteToPitch = (note) => {
         const noteNames = ['c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#', 'a', 'a#', 'b'];
         const octave = Math.floor(note / 12) - 1; // Calculate the octave
         const noteName = noteNames[note % 12]; // Get the note name (e.g., c, d#, etc.)
@@ -36,7 +36,7 @@ const MusicStaff = ({ midiMessages }) => {
       if (msg.noteStatus === "Pressed") {
         const timestampKey = Math.floor(msg.timestamp / 50); // Group by 50 ms intervals
         acc[timestampKey] = acc[timestampKey] || [];
-        acc[timestampKey].push(midiNoteToPitch(msg.note));
+        acc[timestampKey].push(noteToPitch(msg.note));
       }
       return acc;
     }, {});
@@ -53,7 +53,11 @@ const MusicStaff = ({ midiMessages }) => {
     Formatter.FormatAndDraw(context, stave, notes);
   }, [midiMessages]);
 
-  return <div ref={divRef}></div>;
+  return (
+    <>
+      <div ref={divRef}></div>
+    </>
+  );
 };
 
 export default MusicStaff;
