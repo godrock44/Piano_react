@@ -96,11 +96,6 @@ const pianoKeys = [
       return map;
     }, {});
   };
-  // Usage:
-const PianoKeyMapper = ({ note, isSharp }) => {
-    const notation = isSharp ? generateNotation(true) : generateNotation(false);
-    return <span>{notation[note] || 'Unknown'}</span>;
-  };
-  
-  export default PianoKeyMapper;
+
+  export default generateNotation;
   

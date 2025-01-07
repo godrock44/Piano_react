@@ -1,0 +1,19 @@
+.staff-container {
+    width: 100%;
+    height: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  
+  @media (max-width: 600px) {
+    .staff-container {
+      height: 300px;
+    }
+  }
+  
+  @media (max-width: 1024px) {
+    .staff-container {
+      height: 500px;
+    }
+  }
+  
