@@ -1,19 +1,28 @@
-.staff-container {
-    width: 100%;
-    height: auto;
-    overflow-x: auto;
-    overflow-y: hidden;
+.staff {
+  width: 100vw;
+  height: 30vh;
+  align-items: center;
+  background-color: antiquewhite;
+}
+
+@media (max-width: 600px) {
+  .staff image {
+    width: 15%;
+    height: 25%;
   }
-  
-  @media (max-width: 600px) {
-    .staff-container {
-      height: 300px;
-    }
+
+  .staff line {
+    stroke-width: 1;
   }
-  
-  @media (max-width: 1024px) {
-    .staff-container {
-      height: 500px;
-    }
+}
+
+@media (max-width: 400px) {
+  .staff image {
+    width: 20%;
+    height: 20%;
   }
-  
+
+  .staff line {
+    stroke-width: 0.8;
+  }
+}

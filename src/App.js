@@ -3,7 +3,12 @@ import generateNotation from "./keyMapping.js";
 import MusicStaff from "./staff.js";
 import TonePlayer from "./pianoTune.js";
 import RandomMapper  from "./randomMapper.js";
-import Staff from "./keymapsvg/satff.js";
+import Staff from "./satff.js";
+import staffGame from "./pianogame.js"
+import PianoGame from "./pianogame.js";
+import VexFlowExample from "./Vexflowcomponents/vexflow.js";
+
+
 
 function MIDIKeyPressListener() {
   const [midiMessages, setMidiMessages] = useState([]);
@@ -113,11 +118,15 @@ function MIDIKeyPressListener() {
             Time: {currentMessage.timestamp.toFixed()}
           </p>
         </div>
-      )}
+        )}
       {/* Display the musical staff */}
       {/* <MusicStaff midiMessages={midiMessages} /> */}
-     <RandomMapper/>
-     <Staff/>
+     {/* <RandomMapper/> */}
+     
+     <PianoGame/>
+    <VexFlowExample/>
+    
+     
     </div>
   );
 }

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import generateNotation from "./keyMapping";
 
-const notesMap = generateNotation();
+const notesMap = {
+  
+}
 
 const RandomMapper = () => {
   const [displayedNote, setDisplayedNote] = useState(null);
@@ -16,7 +18,6 @@ const RandomMapper = () => {
 
   useEffect(() => {
     generateRandomNote();
-
     const handleMIDIMessage = (message) => {
       const [status, note] = message.data;
       if (status === 144) {
